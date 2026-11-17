@@ -1,14 +1,19 @@
 // All page content lives here. Edit this file to update the site;
 // the components only read from it.
 
+// The site can be served from a sub-path (GitHub Pages serves it under /<repo name>).
+// Files in /public are not prefixed automatically, so wrap their paths in asset().
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+export const asset = (path: string) => `${basePath}${path}`;
+
 export const profile = {
   name: "Hoàng Thiện Quân",
   role: "Backend Developer",
   status: "Open to work",
   intro:
     "Software Engineering graduate from FPT University, focused on backend development with C# and ASP.NET Core. I build RESTful APIs, work with SQL Server and PostgreSQL, and containerize applications with Docker.",
-  cv: "/HoangThienQuan_CV.pdf",
-  // Put a photo in /public and set its path here, e.g. "/portrait.png".
+  cv: asset("/HoangThienQuan_CV.pdf"),
+  // Put a photo in /public and set its path here, e.g. asset("/portrait.png").
   // While this is null the hero shows the initials placeholder.
   portrait: null as string | null,
   initials: "HTQ",
@@ -65,7 +70,7 @@ export type Project = {
   stack: string[];
   /** Short badge over the card picture, e.g. "In development" */
   status?: string;
-  /** Screenshot in /public, e.g. "/projects/kinema.jpg" (16:10 works best). Without it the card shows its number. */
+  /** Screenshot in /public, e.g. asset("/projects/kinema.jpg") (16:10 works best). Without it the card shows its number. */
   image?: string;
   /** Repo or demo links shown as buttons on the card, e.g. { label: "Source", href: "https://github.com/..." } */
   links?: { label: string; href: string }[];
@@ -83,7 +88,7 @@ export const projects: Project[] = [
     summary:
       "A full stack cinema management and online ticket booking platform with customer, employee, manager and admin roles. Customers pick seats, pay through VNPay and get a QR code ticket by email; a reward points module is included.",
     stack: ["ASP.NET Core", "Entity Framework Core", "SQL Server", "JWT", "React", "Redux Toolkit", "VNPay"],
-    image: "/projects/kinema.jpg",
+    image: asset("/projects/kinema.jpg"),
     links: [{ label: "Source repo", href: "https://github.com/QuanHT2412/Kinema" }],
   },
   {
@@ -93,7 +98,7 @@ export const projects: Project[] = [
     summary:
       "Backend services for a livestock feed warehouse management system: product, contract and stock input APIs, Excel import and JWT authorization. I dockerized the application, set up cloud hosting, and took part in unit and system testing.",
     stack: ["ASP.NET Core", "Entity Framework Core", "SQL Server", "JWT", "Docker", "xUnit", "Next.js", "Cloudinary"],
-    image: "/projects/warehouse.jpg",
+    image: asset("/projects/warehouse.jpg"),
     links: [
       { label: "Server repo", href: "https://github.com/trungpqhe173313/SEP490" },
       { label: "Client repo", href: "https://github.com/trungpqhe173313/SEP490_Client" },
