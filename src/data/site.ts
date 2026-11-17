@@ -17,6 +17,8 @@ export const profile = {
   // While this is null the hero shows the initials placeholder.
   portrait: null as string | null,
   initials: "HTQ",
+  // Set to true to show the portrait circle in the hero again.
+  showPortrait: false,
   facts: [
     { value: "C# · ASP.NET Core", label: "Core stack" },
     { value: "SQL Server · PostgreSQL", label: "Databases" },

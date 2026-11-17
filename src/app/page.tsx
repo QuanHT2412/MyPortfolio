@@ -75,7 +75,9 @@ export default function Home() {
       <main id="main" className="relative z-10">
         {/* Hero */}
         <section id="top" className="flex min-h-dvh items-center pb-16 pt-28">
-          <div className="wrap grid items-center gap-14 lg:grid-cols-[1.35fr_1fr] lg:gap-10">
+          <div
+            className={`wrap grid items-center gap-14 lg:gap-10 ${profile.showPortrait ? "lg:grid-cols-[1.35fr_1fr]" : ""}`}
+          >
             <div>
               <Enter>
                 <p className="inline-flex items-center gap-2.5 rounded-full border border-line bg-card/70 px-3.5 py-2 font-mono text-sm text-muted">
@@ -122,9 +124,11 @@ export default function Home() {
               </Enter>
             </div>
 
-            <Enter delay={0.35}>
-              <Portrait />
-            </Enter>
+            {profile.showPortrait && (
+              <Enter delay={0.35}>
+                <Portrait />
+              </Enter>
+            )}
           </div>
         </section>
 
