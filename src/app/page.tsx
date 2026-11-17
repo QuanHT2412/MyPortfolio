@@ -66,6 +66,7 @@ export default function Home() {
   // Hero typing: the name lines type one after another, then the role.
   const NAME_START = 250;
   const NAME_SPEED = 75;
+  const oneLineName = !profile.showPortrait;
 
   return (
     <>
@@ -93,19 +94,29 @@ export default function Home() {
                 aria-label={`${profile.name}, ${profile.role}`}
                 className="mt-7 font-mono font-bold tracking-tight"
               >
+                {/* Without the portrait the name fits on one line from tablet width up;
+                    phones, and the layout with the portrait, stack it one word per line. */}
+                {oneLineName && (
+                  <Typewriter
+                    text={profile.name}
+                    delay={NAME_START}
+                    speed={NAME_SPEED}
+                    className="text-gradient hidden whitespace-nowrap pb-[0.08em] text-[clamp(3.25rem,9vw,7.25rem)] leading-[1.02] md:block"
+                  />
+                )}
                 {nameLines.map((line, i) => (
                   <Typewriter
                     key={line}
                     text={line}
                     delay={NAME_START + nameLines.slice(0, i).join("").length * NAME_SPEED}
                     speed={NAME_SPEED}
-                    className="text-gradient block pb-[0.08em] text-[clamp(3.25rem,9vw,7.25rem)] leading-[1.02]"
+                    className={`text-gradient block pb-[0.08em] text-[clamp(3.25rem,9vw,7.25rem)] leading-[1.02] ${oneLineName ? "md:hidden" : ""}`}
                   />
                 ))}
                 <Typewriter
                   text={`> ${profile.role}`}
                   markChars={1}
-                  delay={NAME_START + nameLines.join("").length * NAME_SPEED + 150}
+                  delay={NAME_START + profile.name.length * NAME_SPEED + 150}
                   speed={45}
                   className="mt-4 block text-[clamp(1.25rem,3.2vw,2.25rem)] leading-tight text-text"
                 />
